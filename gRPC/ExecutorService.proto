@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package dynamiccalls.Inventory;
+
+option java_multiple_files = true;
+option csharp_namespace = "DynamicCallsClient";
+
+message ProductRequest {
+  string productId = 1;
+  string name = 2;
+  float price = 3;
+  int32 quantity = 4;
+}
+
+// Definicja wiadomości używanej do przesyłania odpowiedzi na żądanie dodania produktu.
+message AddProductResponse {
+  string message = 1; // Komunikat potwierdzający dodanie produktu.
+}
+
+// Definicja usługi zarządzającej inwentarzem produktów.
+service InventoryService {
+  // Metoda umożliwiająca dodanie nowego produktu do inwentarza.
+  rpc addProduct(ProductRequest) returns (AddProductResponse);
+}
